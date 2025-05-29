@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cabinsense"
+version = "0.1.0"
+description = "Vehicle seat occupancy detection benchmark on the SVIRO dataset"
+readme = "README.md"
+requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "akshaynavani" }]
+dependencies = [
+    "torch>=2.1",
+    "torchvision>=0.16",
+    "numpy>=1.24",
+    "pillow>=10.0",
+    "pyyaml>=6.0",
+    "pycocotools>=2.0.7",
+    "mlflow>=2.9",
+    "tqdm>=4.66",
+    "pandas>=2.0",
+]
+
+[project.optional-dependencies]
+yolov8 = ["ultralytics>=8.1"]
+yolox = ["yolox>=0.3.0"]
+efficientdet = ["effdet>=0.4.1", "timm>=0.9"]
+sagemaker = ["sagemaker>=2.200", "boto3>=1.34"]
+viz = ["matplotlib>=3.7"]
+dev = ["pytest>=7.4", "ruff>=0.3"]
+all = ["cabinsense[yolov8,yolox,efficientdet,sagemaker,viz]"]
+
+[project.scripts]
+cabinsense = "cabinsense.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["cabinsense*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+
+[tool.ruff]
+line-length = 100
