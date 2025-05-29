@@ -1,0 +1,23 @@
+# SVIRO dataset configuration.
+# Download from https://sviro.kl.dfki.de (bounding box + whole image archives).
+root: ${SVIRO_ROOT:-data/sviro}
+image_type: grayscale_wholeImage   # or rgb_wholeImage / ir_wholeImage
+box_dir: boxes_wholeImage
+vehicles:
+  - aclass
+  - escape
+  - hilux
+  - i3
+  - lexus
+  - tesla
+  - tiguan
+  - tucson
+  - x5
+  - zoe
+# Hold out whole vehicles for validation so the benchmark measures generalisation
+# to unseen cabins rather than memorised interiors.
+val_vehicles: [tesla, x5]
+test_split: test                  # SVIRO's own test folder
+min_box_size: 4                   # px; boxes smaller than this are dropped
+image_size: 640
+export_dir: ${SVIRO_EXPORT:-data/sviro_export}
