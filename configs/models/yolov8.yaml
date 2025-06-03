@@ -1,0 +1,14 @@
+name: yolov8m
+family: yolov8
+weights: yolov8m.pt
+image_size: 640
+train:
+  epochs: 50
+  batch_size: 16
+  optimizer: SGD
+  lr0: 0.01
+  cos_lr: true
+  patience: 10
+  fliplr: 0.5
+  mosaic: 1.0
+  close_mosaic: 10
