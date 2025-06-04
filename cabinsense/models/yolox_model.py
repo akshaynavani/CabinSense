@@ -102,7 +102,7 @@ def _trainer_args(cfg: Dict[str, Any]) -> argparse.Namespace:
         fp16=bool(tcfg.get("amp", True)),
         occupy=False,
         resume=False,
-        ckpt=cfg.get("weights"),
+        ckpt=cfg.get("weights") or None,
         start_epoch=None,
         cache=None,
         logger="tensorboard",
