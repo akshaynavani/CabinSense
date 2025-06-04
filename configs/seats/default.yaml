@@ -1,0 +1,16 @@
+# Rear-bench seat regions in normalised image coordinates [x1, y1, x2, y2].
+# Positions follow SVIRO's file-name order (left, middle, right as seen in the image).
+# Override per vehicle under `vehicles:` when a cabin's geometry differs noticeably.
+default:
+  left:   [0.00, 0.10, 0.40, 1.00]
+  middle: [0.33, 0.10, 0.67, 1.00]
+  right:  [0.60, 0.10, 1.00, 1.00]
+vehicles:
+  i3:
+    # Two-seat rear bench; the middle region is kept narrow so it rarely fires.
+    left:   [0.00, 0.10, 0.45, 1.00]
+    middle: [0.45, 0.10, 0.55, 1.00]
+    right:  [0.55, 0.10, 1.00, 1.00]
+assignment:
+  score_thresh: 0.4      # ignore detections below this confidence
+  min_overlap: 0.5       # fraction of a detection's area that must fall inside the seat
