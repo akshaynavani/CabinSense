@@ -1,0 +1,14 @@
+name: yolox_m
+family: yolox
+variant: yolox_m
+# Optional COCO-pretrained checkpoint from the YOLOX release page.
+weights: ${YOLOX_WEIGHTS:-}
+image_size: 640
+nms_thresh: 0.65
+train:
+  epochs: 50
+  batch_size: 16
+  amp: true
+  no_aug_epochs: 10
+  warmup_epochs: 3
+  eval_every: 1
