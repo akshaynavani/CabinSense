@@ -71,10 +71,18 @@ class TorchvisionDetector(TorchDetector):
         if self.cfg.get("freeze_backbone_bn", True):
             for m in model.backbone.modules():
                 if isinstance(m, nn.BatchNorm2d):
-                    m.eval()
                     for p in m.parameters():
                         p.requires_grad_(False)
         return model
+
+    def train_mode(self) -> None:
+        # model.train() would re-enable running-stat updates in the frozen BatchNorms; with
+        # batch size 8 those statistics are too noisy, so keep them in eval mode.
+        self.model.train()
+        if self.cfg.get("freeze_backbone_bn", True):
+            for m in self.model.backbone.modules():
+                if isinstance(m, nn.BatchNorm2d):
+                    m.eval()
 
     def train_transforms(self) -> Compose:
         # Resizing and normalisation happen inside GeneralizedRCNNTransform.

@@ -43,6 +43,10 @@ class TorchDetector(Detector):
         """Inference on transformed images; must return boxes in original image coordinates."""
 
     # ---- shared behaviour -------------------------------------------------------------------
+    def train_mode(self) -> None:
+        """Put the model in training mode (subclasses may keep some layers frozen)."""
+        self.model.train()
+
     def parameter_groups(self) -> List[Dict[str, Any]]:
         """Backbone gets a reduced LR multiplier (``train.backbone_lr_mult``)."""
         mult = float(self.cfg.get("train", {}).get("backbone_lr_mult", 1.0))
