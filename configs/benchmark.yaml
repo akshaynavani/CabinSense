@@ -21,3 +21,12 @@ models:
   - configs/models/efficientdet.yaml
   - configs/models/yolov8.yaml
   - configs/models/yolox.yaml
+sagemaker:
+  instance_type: ml.g5.2xlarge   # 1x A10G 24 GB
+  instance_count: 1
+  framework_version: "2.2"
+  py_version: py310
+  volume_size: 100
+  max_run_hours: 24
+  use_spot: true
+  max_wait_hours: 36
