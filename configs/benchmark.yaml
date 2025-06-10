@@ -1,0 +1,23 @@
+# Full five-model benchmark on SVIRO.
+experiment: cabinsense-sviro
+data: configs/data/sviro.yaml
+seats: configs/seats/default.yaml
+output_dir: ${CABINSENSE_OUTPUT:-outputs}
+device: null              # auto: cuda if available
+fail_fast: false
+tracking:
+  enabled: true
+  experiment: cabinsense-sviro
+  tracking_uri: ${MLFLOW_TRACKING_URI:-}
+  log_checkpoints: true
+eval:
+  split: test
+  batch_size: 8
+  score_thresh: 0.001
+  latency_runs: 50
+models:
+  - configs/models/faster_rcnn.yaml
+  - configs/models/retinanet.yaml
+  - configs/models/efficientdet.yaml
+  - configs/models/yolov8.yaml
+  - configs/models/yolox.yaml
