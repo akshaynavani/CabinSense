@@ -51,7 +51,13 @@ def to_coco(samples: Sequence[Sample], image_prefix: str = "") -> Dict:
     categories = [
         {"id": i + 1, "name": name, "supercategory": "cabin"} for i, name in enumerate(DETECTION_CLASSES)
     ]
-    return {"images": images, "annotations": annotations, "categories": categories}
+    return {
+        "info": {"description": "SVIRO exported by CabinSense", "version": "1.0"},
+        "licenses": [],
+        "images": images,
+        "annotations": annotations,
+        "categories": categories,
+    }
 
 
 def write_coco(samples: Sequence[Sample], out_path: Path, image_prefix: str = "") -> Path:
